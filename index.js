@@ -14,11 +14,13 @@ connectMongoDB(url)
 
 // Middlewares 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+}))
 
 // Routes 
 app.use('/api', userRoutes)
-
 
 app.listen(PORT, () => { 
     console.log(`Server is running at http://localhost:${PORT}`) 
