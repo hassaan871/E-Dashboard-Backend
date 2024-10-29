@@ -1,5 +1,5 @@
 const express = require('express')
-
+const cors = require('cors')
 const { connectMongoDB } = require('./db/connection');
 const userRoutes = require('./routes/userRoutes')
 const url = 'mongodb://127.0.0.1:27017/e-comm'
@@ -14,6 +14,7 @@ connectMongoDB(url)
 
 // Middlewares 
 app.use(express.json())
+app.use(cors())
 
 // Routes 
 app.use('/api', userRoutes)
