@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const { connectMongoDB } = require('./db/connection');
 const userRoutes = require('./routes/userRoutes')
+const productRoutes = require('./routes/productRoute')
 const url = 'mongodb://127.0.0.1:27017/e-comm'
 const PORT = 8000
 
@@ -31,6 +32,7 @@ app.use(cors(corsOptions))
 
 // Routes 
 app.use('/api', userRoutes)
+app.use('/api', productRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`)
