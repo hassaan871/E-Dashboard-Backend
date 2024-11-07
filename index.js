@@ -7,6 +7,15 @@ const PORT = 8000
 
 const app = express();
 
+// CORS configuration object 
+const corsOptions = {
+    origin: 'http://your-frontend-domain.com',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+};
+
 // Connection 
 connectMongoDB(url)
     .then(() => { console.log("MongoDB connected") })
@@ -14,14 +23,15 @@ connectMongoDB(url)
 
 // Middlewares 
 app.use(express.json())
-app.use(cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
-}))
+app.use(cors(corsOptions))
+// app.use(cors({
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"]
+// }))
 
 // Routes 
 app.use('/api', userRoutes)
 
-app.listen(PORT, () => { 
-    console.log(`Server is running at http://localhost:${PORT}`) 
+app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`)
 })
